@@ -47,6 +47,18 @@ export interface CategoryInfo {
   algorithmCount: number;
 }
 
+// Glossary term data — used by glossary pages, search, and AI explanations
+export interface GlossaryTermData {
+  slug: string;
+  name: string;
+  definition: string;
+  formalDefinition?: string;
+  formula?: string;
+  relatedTerms: string[];
+  category: string;
+  tags: string[];
+}
+
 // --- Visualization types (used starting Phase 2) ---
 
 export type StepAction =

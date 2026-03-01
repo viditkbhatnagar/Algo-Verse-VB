@@ -42,3 +42,6 @@ drizzle/meta
 .vscode
 *.swp
 *.swo
+
+# claude code
+.claude/

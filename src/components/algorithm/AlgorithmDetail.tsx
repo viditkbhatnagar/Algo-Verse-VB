@@ -12,6 +12,7 @@ import { UseCases } from "@/components/algorithm/UseCases";
 import { Monitor } from "lucide-react";
 import type { AlgorithmMetadata } from "@/lib/visualization/types";
 import { getVisualization } from "@/visualizations/registry";
+import { AIChatPanel } from "@/components/ai/AIChatPanel";
 
 interface AlgorithmDetailProps {
   algorithm: AlgorithmMetadata;
@@ -90,6 +91,9 @@ export function AlgorithmDetail({ algorithm }: AlgorithmDetailProps) {
 
       {/* Related Algorithms */}
       <RelatedAlgorithms algorithmIds={algorithm.relatedAlgorithms} />
+
+      {/* AI Chat Panel */}
+      <AIChatPanel algorithm={algorithm} />
     </div>
   );
 }

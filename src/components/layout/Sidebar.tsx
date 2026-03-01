@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, BookOpenText } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { CategoryIcon } from "@/components/shared/CategoryIcon";
@@ -31,6 +31,20 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         </h2>
       </div>
       <nav className="flex-1 overflow-y-auto scrollbar-thin p-2 space-y-0.5">
+        <Link
+          href="/glossary"
+          onClick={onNavigate}
+          className={cn(
+            "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors mb-1",
+            pathname.startsWith("/glossary")
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:bg-surface hover:text-foreground"
+          )}
+        >
+          <BookOpenText className="h-4 w-4 shrink-0" />
+          <span className="flex-1 text-left">Glossary</span>
+        </Link>
+        <div className="border-b border-border mb-1" />
         {categories.map((cat: CategoryInfo) => {
           const isExpanded = expanded.includes(cat.slug);
           const algorithms = getAlgorithmsByCategory(cat.slug);
