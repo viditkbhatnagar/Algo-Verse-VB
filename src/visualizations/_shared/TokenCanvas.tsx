@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { TokenData, TokenConnection } from "@/lib/visualization/types";
 
 interface TokenCanvasProps {
@@ -48,6 +49,7 @@ export function TokenCanvas({
   layout = "horizontal",
   className,
 }: TokenCanvasProps) {
+  const themeColors = useThemeColors();
   return (
     <div className={`${className ?? ""} space-y-4`} style={{ minHeight: 150 }}>
       {/* Input tokens row */}
@@ -68,7 +70,7 @@ export function TokenCanvas({
                 style={{
                   borderColor: color,
                   backgroundColor: `${color}20`,
-                  color: "#e2e8f0",
+                  color: themeColors.text,
                 }}
                 animate={{
                   borderColor: color,
@@ -132,10 +134,10 @@ export function TokenCanvas({
         <>
           <div className="flex justify-center">
             <svg width={40} height={24}>
-              <line x1={20} y1={0} x2={20} y2={24} stroke="#475569" strokeWidth={1.5} markerEnd="url(#token-arrow)" />
+              <line x1={20} y1={0} x2={20} y2={24} stroke={themeColors.textSecondary} strokeWidth={1.5} markerEnd="url(#token-arrow)" />
               <defs>
                 <marker id="token-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                  <polygon points="0 0, 8 3, 0 6" fill="#475569" />
+                  <polygon points="0 0, 8 3, 0 6" fill={themeColors.textSecondary} />
                 </marker>
               </defs>
             </svg>
@@ -150,7 +152,7 @@ export function TokenCanvas({
                   style={{
                     borderColor: color,
                     backgroundColor: `${color}20`,
-                    color: "#e2e8f0",
+                    color: themeColors.text,
                   }}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}

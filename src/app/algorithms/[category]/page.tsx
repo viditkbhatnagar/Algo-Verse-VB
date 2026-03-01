@@ -21,6 +21,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
   return {
     title: `${category.name} — AlgoVerse`,
     description: category.description,
+    openGraph: {
+      title: `${category.name} — AlgoVerse`,
+      description: category.description,
+      type: "article",
+    },
   };
 }
 

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { HighlightColor } from "@/lib/visualization/types";
 
 interface GridCanvasProps {
@@ -41,6 +42,8 @@ export function GridCanvas({
   isChessboard = false,
   className,
 }: GridCanvasProps) {
+  const themeColors = useThemeColors();
+
   if (grid.length === 0) return null;
 
   const rows = grid.length;
@@ -90,9 +93,9 @@ export function GridCanvas({
                   } else if (highlight) {
                     bgColor = COLOR_MAP[highlight];
                   } else if (isChessboard) {
-                    bgColor = (ri + ci) % 2 === 0 ? "#1e293b" : "#334155";
+                    bgColor = (ri + ci) % 2 === 0 ? themeColors.bgSubtle : themeColors.border;
                   } else {
-                    bgColor = "#1e293b";
+                    bgColor = themeColors.bgSubtle;
                   }
 
                   return (

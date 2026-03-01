@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface ConvolutionCanvasProps {
   input: number[][];
@@ -26,6 +27,8 @@ export function ConvolutionCanvas({
   computationDetail,
   className,
 }: ConvolutionCanvasProps) {
+  const themeColors = useThemeColors();
+
   const inputRows = input.length;
   const inputCols = input[0]?.length ?? 0;
   const kernelRows = kernel.length;
@@ -59,13 +62,13 @@ export function ConvolutionCanvas({
                             style={{
                               width: CELL_SIZE,
                               height: CELL_SIZE,
-                              borderColor: isUnderKernel ? VIZ_COLORS.active : "#334155",
-                              backgroundColor: isUnderKernel ? `${VIZ_COLORS.active}30` : "#1a1a2e",
-                              color: "#e2e8f0",
+                              borderColor: isUnderKernel ? VIZ_COLORS.active : themeColors.border,
+                              backgroundColor: isUnderKernel ? `${VIZ_COLORS.active}30` : themeColors.bgSubtle,
+                              color: themeColors.text,
                             }}
                             animate={{
-                              backgroundColor: isUnderKernel ? `${VIZ_COLORS.active}30` : "#1a1a2e",
-                              borderColor: isUnderKernel ? VIZ_COLORS.active : "#334155",
+                              backgroundColor: isUnderKernel ? `${VIZ_COLORS.active}30` : themeColors.bgSubtle,
+                              borderColor: isUnderKernel ? VIZ_COLORS.active : themeColors.border,
                             }}
                             transition={{ duration: 0.2 }}
                           >
@@ -100,7 +103,7 @@ export function ConvolutionCanvas({
                           height: CELL_SIZE,
                           borderColor: VIZ_COLORS.comparing,
                           backgroundColor: `${VIZ_COLORS.comparing}20`,
-                          color: "#e2e8f0",
+                          color: themeColors.text,
                         }}
                       >
                         {val}
@@ -133,16 +136,16 @@ export function ConvolutionCanvas({
                           style={{
                             width: CELL_SIZE,
                             height: CELL_SIZE,
-                            borderColor: isCurrent ? VIZ_COLORS.completed : "#334155",
+                            borderColor: isCurrent ? VIZ_COLORS.completed : themeColors.border,
                             backgroundColor: isCurrent
                               ? `${VIZ_COLORS.completed}30`
                               : hasValue
                                 ? "#1e293b"
-                                : "#1a1a2e",
-                            color: "#e2e8f0",
+                                : themeColors.bgSubtle,
+                            color: themeColors.text,
                           }}
                           animate={{
-                            backgroundColor: isCurrent ? `${VIZ_COLORS.completed}30` : hasValue ? "#1e293b" : "#1a1a2e",
+                            backgroundColor: isCurrent ? `${VIZ_COLORS.completed}30` : hasValue ? "#1e293b" : themeColors.bgSubtle,
                           }}
                           transition={{ duration: 0.2 }}
                         >

@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { TreeNodeData, TreeEdgeData, HighlightColor, HighlightInfo } from "@/lib/visualization/types";
 
 interface TreeCanvasProps {
@@ -119,6 +120,8 @@ export function TreeCanvas({
   arrayHighlights,
   className,
 }: TreeCanvasProps) {
+  const themeColors = useThemeColors();
+
   const positioned = useMemo(
     () => computeTreeLayout(nodes, edges, rootId),
     [nodes, edges, rootId]
@@ -164,7 +167,7 @@ export function TreeCanvas({
 
               const color = edge.highlight
                 ? COLOR_MAP[edge.highlight]
-                : "#334155";
+                : themeColors.border;
 
               return (
                 <g key={`${edge.source}-${edge.target}`}>
@@ -210,7 +213,7 @@ export function TreeCanvas({
                     cy={node.y}
                     r={NODE_RADIUS}
                     fill={color}
-                    stroke={isCurrent ? "#fff" : "#334155"}
+                    stroke={isCurrent ? themeColors.text : themeColors.border}
                     strokeWidth={isCurrent ? 3 : 2}
                     initial={false}
                     animate={{ fill: color, scale: isCurrent ? 1.1 : 1 }}
@@ -288,7 +291,7 @@ export function TreeCanvas({
                       y={cellSize / 2}
                       textAnchor="middle"
                       dominantBaseline="central"
-                      fill="#e2e8f0"
+                      fill={themeColors.text}
                       className="font-mono font-bold"
                       fontSize={Math.min(12, cellSize * 0.4)}
                     >

@@ -58,7 +58,7 @@ export function AlgorithmDetail({ algorithm }: AlgorithmDetailProps) {
       </div>
 
       {/* Description */}
-      <div className="prose prose-invert prose-slate max-w-none">
+      <div className="prose dark:prose-invert prose-slate max-w-none">
         {algorithm.description.split("\n\n").map((para, i) => (
           <p key={i} className="text-muted-foreground leading-relaxed">
             {para}

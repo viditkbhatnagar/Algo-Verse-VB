@@ -1,7 +1,9 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { GraphNode, GraphEdge } from "@/lib/visualization/types";
 
 interface GraphCanvasProps {
@@ -38,7 +40,8 @@ function getNodeColor(
 function getEdgeColor(
   source: string,
   target: string,
-  nodeStates: Record<string, "unvisited" | "visiting" | "visited">
+  nodeStates: Record<string, "unvisited" | "visiting" | "visited">,
+  borderColor: string
 ): string {
   const srcVisited =
     nodeStates[source] === "visited" || nodeStates[source] === "visiting";
@@ -46,7 +49,7 @@ function getEdgeColor(
     nodeStates[target] === "visited" || nodeStates[target] === "visiting";
   if (srcVisited && tgtVisited) return VIZ_COLORS.completed;
   if (srcVisited || tgtVisited) return VIZ_COLORS.comparing;
-  return "#334155";
+  return borderColor;
 }
 
 export function GraphCanvas({
@@ -58,16 +61,38 @@ export function GraphCanvas({
   visitOrder = [],
   className,
 }: GraphCanvasProps) {
+  const themeColors = useThemeColors();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 400, height: 320 });
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) {
+        const w = entry.contentRect.width;
+        setDimensions({
+          width: Math.max(300, w),
+          height: Math.max(250, w * 0.8),
+        });
+      }
+    });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={`flex gap-4 ${className ?? ""}`}>
-      <div className="flex-1 overflow-x-auto">
-        <svg viewBox="0 0 400 320" className="w-full max-w-md mx-auto select-none">
+      <div ref={containerRef} className="flex-1 min-h-[250px] md:min-h-[300px]">
+        <svg viewBox={`0 0 ${dimensions.width} ${dimensions.height}`} className="w-full select-none">
           {/* Edges */}
           {edges.map((edge) => {
             const source = nodes.find((n) => n.id === edge.source);
             const target = nodes.find((n) => n.id === edge.target);
             if (!source || !target) return null;
-            const color = getEdgeColor(edge.source, edge.target, nodeStates);
+            const color = getEdgeColor(edge.source, edge.target, nodeStates, themeColors.border);
 
             return (
               <motion.line
@@ -98,7 +123,7 @@ export function GraphCanvas({
                   cy={node.y}
                   r={NODE_RADIUS}
                   fill={color}
-                  stroke={isCurrent ? "#fff" : "#334155"}
+                  stroke={isCurrent ? themeColors.text : themeColors.border}
                   strokeWidth={isCurrent ? 3 : 2}
                   initial={false}
                   animate={{

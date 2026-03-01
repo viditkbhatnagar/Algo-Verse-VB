@@ -13,6 +13,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import type { TrainingCurvePoint } from "@/lib/visualization/types";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface LossChartCanvasProps {
   history: TrainingCurvePoint[];
@@ -33,6 +34,7 @@ export function LossChartCanvas({
   yLabel = "Loss",
   className,
 }: LossChartCanvasProps) {
+  const themeColors = useThemeColors();
   // Only show data up to currentEpoch for progressive reveal
   const visibleData = useMemo(
     () => history.filter((h) => h.epoch <= currentEpoch),
@@ -43,29 +45,29 @@ export function LossChartCanvas({
     <div className={className} style={{ minHeight: 280 }}>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={visibleData} margin={{ top: 10, right: 20, bottom: 30, left: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+          <CartesianGrid strokeDasharray="3 3" stroke={themeColors.bgSubtle} />
           <XAxis
             dataKey="epoch"
-            stroke="#64748b"
+            stroke={themeColors.textSecondary}
             fontSize={10}
             fontFamily="JetBrains Mono, monospace"
-            label={{ value: xLabel, position: "bottom", offset: 10, fill: "#64748b", fontSize: 11 }}
+            label={{ value: xLabel, position: "bottom", offset: 10, fill: themeColors.textSecondary, fontSize: 11 }}
           />
           <YAxis
-            stroke="#64748b"
+            stroke={themeColors.textSecondary}
             fontSize={10}
             fontFamily="JetBrains Mono, monospace"
-            label={{ value: yLabel, angle: -90, position: "insideLeft", offset: 0, fill: "#64748b", fontSize: 11 }}
+            label={{ value: yLabel, angle: -90, position: "insideLeft", offset: 0, fill: themeColors.textSecondary, fontSize: 11 }}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#1a1a2e",
-              border: "1px solid #334155",
+              backgroundColor: themeColors.bgSubtle,
+              border: `1px solid ${themeColors.border}`,
               borderRadius: "8px",
               fontFamily: "JetBrains Mono, monospace",
               fontSize: 11,
             }}
-            labelStyle={{ color: "#94a3b8" }}
+            labelStyle={{ color: themeColors.textSecondary }}
           />
           <Legend
             wrapperStyle={{
@@ -95,7 +97,7 @@ export function LossChartCanvas({
               label={{
                 value: ann.label,
                 position: "top",
-                fill: "#94a3b8",
+                fill: themeColors.textSecondary,
                 fontSize: 9,
               }}
             />

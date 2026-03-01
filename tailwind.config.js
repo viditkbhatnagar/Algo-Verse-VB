@@ -9,25 +9,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0a",
-        surface: "#1a1a2e",
+        background: "var(--background)",
+        surface: "var(--surface)",
+        foreground: "var(--foreground)",
         primary: {
-          DEFAULT: "#6366f1",
+          DEFAULT: "var(--primary)",
           foreground: "#ffffff",
         },
         accent: {
-          DEFAULT: "#22d3ee",
+          DEFAULT: "var(--accent)",
           foreground: "#0a0a0a",
         },
-        success: "#22c55e",
-        warning: "#f59e0b",
-        error: "#ef4444",
+        success: "var(--success)",
+        warning: "var(--warning)",
+        error: "var(--error)",
         muted: {
-          DEFAULT: "#1e293b",
-          foreground: "#94a3b8",
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
         },
-        border: "#334155",
-        ring: "#6366f1",
+        border: "var(--border)",
+        ring: "var(--ring)",
         viz: {
           default: "#475569",
           active: "#6366f1",

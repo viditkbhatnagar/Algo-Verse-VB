@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, BookOpenText, BarChart3, Star } from "lucide-react";
+import { ChevronDown, BookOpenText, BarChart3, Star, GitCompareArrows } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { CategoryIcon } from "@/components/shared/CategoryIcon";
@@ -62,7 +62,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
           href="/glossary"
           onClick={onNavigate}
           className={cn(
-            "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors mb-1",
+            "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
             pathname.startsWith("/glossary")
               ? "bg-primary/10 text-primary"
               : "text-muted-foreground hover:bg-surface hover:text-foreground"
@@ -70,6 +70,19 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         >
           <BookOpenText className="h-4 w-4 shrink-0" />
           <span className="flex-1 text-left">Glossary</span>
+        </Link>
+        <Link
+          href="/compare"
+          onClick={onNavigate}
+          className={cn(
+            "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors mb-1",
+            pathname.startsWith("/compare")
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:bg-surface hover:text-foreground"
+          )}
+        >
+          <GitCompareArrows className="h-4 w-4 shrink-0" />
+          <span className="flex-1 text-left">Compare</span>
         </Link>
         <div className="border-b border-border mb-1" />
         {categories.map((cat: CategoryInfo) => {

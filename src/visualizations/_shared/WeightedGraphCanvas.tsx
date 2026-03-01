@@ -1,7 +1,9 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { GraphNode, WeightedEdge, HighlightColor } from "@/lib/visualization/types";
 
 interface WeightedGraphCanvasProps {
@@ -50,12 +52,12 @@ function getNodeColor(
   }
 }
 
-function getEdgeColor(edge: WeightedEdge, mstSet: Set<string>): string {
+function getEdgeColor(edge: WeightedEdge, mstSet: Set<string>, borderColor: string): string {
   if (edge.highlight) return COLOR_MAP[edge.highlight];
   if (edge.inMST || mstSet.has(`${edge.source}-${edge.target}`) || mstSet.has(`${edge.target}-${edge.source}`)) {
     return VIZ_COLORS.mstEdge;
   }
-  return "#334155";
+  return borderColor;
 }
 
 function getEdgeWidth(edge: WeightedEdge, mstSet: Set<string>): number {
@@ -82,11 +84,32 @@ export function WeightedGraphCanvas({
   const mstSet = new Set(
     (mstEdges ?? []).map((e) => `${e.source}-${e.target}`)
   );
+  const themeColors = useThemeColors();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 440, height: 340 });
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) {
+        const w = entry.contentRect.width;
+        setDimensions({
+          width: Math.max(300, w),
+          height: Math.max(250, w * 0.77),
+        });
+      }
+    });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className={`flex gap-4 ${className ?? ""}`}>
-      <div className="flex-1 overflow-x-auto">
-        <svg viewBox="0 0 440 340" className="w-full max-w-lg mx-auto select-none">
+      <div ref={containerRef} className="flex-1 min-h-[250px] md:min-h-[300px]">
+        <svg viewBox={`0 0 ${dimensions.width} ${dimensions.height}`} className="w-full select-none">
           <defs>
             <marker
               id="wg-arrowhead"
@@ -96,7 +119,7 @@ export function WeightedGraphCanvas({
               refY="3"
               orient="auto"
             >
-              <polygon points="0 0, 8 3, 0 6" fill="#94a3b8" />
+              <polygon points="0 0, 8 3, 0 6" fill={themeColors.textSecondary} />
             </marker>
           </defs>
 
@@ -106,7 +129,7 @@ export function WeightedGraphCanvas({
             const target = nodes.find((n) => n.id === edge.target);
             if (!source || !target) return null;
 
-            const color = getEdgeColor(edge, mstSet);
+            const color = getEdgeColor(edge, mstSet, themeColors.border);
             const width = getEdgeWidth(edge, mstSet);
 
             // Shorten line to not overlap nodes
@@ -145,7 +168,7 @@ export function WeightedGraphCanvas({
                   width={20}
                   height={16}
                   rx={3}
-                  fill="#0f172a"
+                  fill={themeColors.bgSubtle}
                   opacity={0.8}
                 />
                 <text
@@ -153,7 +176,7 @@ export function WeightedGraphCanvas({
                   y={midY}
                   textAnchor="middle"
                   dominantBaseline="central"
-                  fill="#e2e8f0"
+                  fill={themeColors.text}
                   className="font-mono"
                   fontSize={10}
                 >
@@ -176,7 +199,7 @@ export function WeightedGraphCanvas({
                   cy={node.y}
                   r={NODE_RADIUS}
                   fill={color}
-                  stroke={isCurrent ? "#fff" : "#334155"}
+                  stroke={isCurrent ? themeColors.text : themeColors.border}
                   strokeWidth={isCurrent ? 3 : 2}
                   initial={false}
                   animate={{ fill: color, scale: isCurrent ? 1.1 : 1 }}

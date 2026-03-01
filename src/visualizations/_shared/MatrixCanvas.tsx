@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { HighlightColor } from "@/lib/visualization/types";
 
 interface MatrixCanvasProps {
@@ -45,6 +46,8 @@ export function MatrixCanvas({
   showZeros = true,
   className,
 }: MatrixCanvasProps) {
+  const themeColors = useThemeColors();
+
   if (matrix.length === 0) return null;
 
   const rows = matrix.length;
@@ -95,7 +98,7 @@ export function MatrixCanvas({
                     currentCell && currentCell[0] === ri && currentCell[1] === ci;
                   const isPath = pathSet.has(key);
 
-                  let bgColor = "#1e293b";
+                  let bgColor = themeColors.bgSubtle;
                   if (isCurrent) {
                     bgColor = VIZ_COLORS.active;
                   } else if (highlight) {

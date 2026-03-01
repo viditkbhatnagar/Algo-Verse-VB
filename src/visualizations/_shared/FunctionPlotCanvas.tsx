@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import * as d3 from "d3";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { FunctionPlotPoint } from "@/lib/visualization/types";
 
 interface FunctionPlotCanvasProps {
@@ -36,6 +37,7 @@ export function FunctionPlotCanvas({
 }: FunctionPlotCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 600, height: 350 });
+  const themeColors = useThemeColors();
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -73,22 +75,22 @@ export function FunctionPlotCanvas({
         <g transform={`translate(${padding.left}, ${padding.top})`}>
           {/* Grid */}
           {xTicks.map((t) => (
-            <line key={`gx-${t}`} x1={xScale(t)} x2={xScale(t)} y1={0} y2={innerHeight} stroke="#1e293b" strokeWidth={0.5} />
+            <line key={`gx-${t}`} x1={xScale(t)} x2={xScale(t)} y1={0} y2={innerHeight} stroke={themeColors.bgSubtle} strokeWidth={0.5} />
           ))}
           {yTicks.map((t) => (
-            <line key={`gy-${t}`} x1={0} x2={innerWidth} y1={yScale(t)} y2={yScale(t)} stroke="#1e293b" strokeWidth={0.5} />
+            <line key={`gy-${t}`} x1={0} x2={innerWidth} y1={yScale(t)} y2={yScale(t)} stroke={themeColors.bgSubtle} strokeWidth={0.5} />
           ))}
 
           {/* Axes */}
-          <line x1={0} x2={innerWidth} y1={innerHeight} y2={innerHeight} stroke="#475569" />
-          <line x1={0} x2={0} y1={0} y2={innerHeight} stroke="#475569" />
+          <line x1={0} x2={innerWidth} y1={innerHeight} y2={innerHeight} stroke={themeColors.textSecondary} />
+          <line x1={0} x2={0} y1={0} y2={innerHeight} stroke={themeColors.textSecondary} />
 
           {/* Zero lines */}
           {yRange[0] < 0 && yRange[1] > 0 && (
-            <line x1={0} x2={innerWidth} y1={yScale(0)} y2={yScale(0)} stroke="#475569" strokeWidth={0.8} />
+            <line x1={0} x2={innerWidth} y1={yScale(0)} y2={yScale(0)} stroke={themeColors.textSecondary} strokeWidth={0.8} />
           )}
           {xRange[0] < 0 && xRange[1] > 0 && (
-            <line x1={xScale(0)} x2={xScale(0)} y1={0} y2={innerHeight} stroke="#475569" strokeWidth={0.8} />
+            <line x1={xScale(0)} x2={xScale(0)} y1={0} y2={innerHeight} stroke={themeColors.textSecondary} strokeWidth={0.8} />
           )}
 
           {/* Tick labels */}

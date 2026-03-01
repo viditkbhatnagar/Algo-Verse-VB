@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import type { LinkedListNodeData, HighlightColor } from "@/lib/visualization/types";
 
 interface LinkedListCanvasProps {
@@ -48,6 +49,8 @@ export function LinkedListCanvas({
       </div>
     );
   }
+
+  const themeColors = useThemeColors();
 
   // Build ordered list from head
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
@@ -108,7 +111,7 @@ export function LinkedListCanvas({
           >
             <polygon
               points={`${ARROW_SIZE} 0, 0 ${ARROW_SIZE / 2}, ${ARROW_SIZE} ${ARROW_SIZE}`}
-              fill="#64748b"
+              fill={themeColors.textSecondary}
             />
           </marker>
         </defs>
@@ -138,7 +141,7 @@ export function LinkedListCanvas({
                   height={NODE_HEIGHT}
                   rx={6}
                   fill={color}
-                  stroke={isCurrent ? "#fff" : "#334155"}
+                  stroke={isCurrent ? themeColors.text : themeColors.border}
                   strokeWidth={isCurrent ? 2.5 : 1.5}
                   initial={false}
                   animate={{ fill: color }}
@@ -177,7 +180,7 @@ export function LinkedListCanvas({
                     y1={y + NODE_HEIGHT / 2 + 8}
                     x2={x - GAP + ARROW_SIZE}
                     y2={y + NODE_HEIGHT / 2 + 8}
-                    stroke="#64748b"
+                    stroke={themeColors.textSecondary}
                     strokeWidth={1.5}
                     markerEnd="url(#ll-arrow-back)"
                   />
@@ -191,7 +194,7 @@ export function LinkedListCanvas({
                       y1={y + NODE_HEIGHT / 2}
                       x2={x + NODE_WIDTH + 16}
                       y2={y + NODE_HEIGHT / 2}
-                      stroke="#475569"
+                      stroke={themeColors.textSecondary}
                       strokeWidth={2}
                     />
                     <text
@@ -199,7 +202,7 @@ export function LinkedListCanvas({
                       y={y + NODE_HEIGHT / 2}
                       textAnchor="start"
                       dominantBaseline="central"
-                      fill="#64748b"
+                      fill={themeColors.textSecondary}
                       className="font-mono font-bold"
                       fontSize={12}
                     >

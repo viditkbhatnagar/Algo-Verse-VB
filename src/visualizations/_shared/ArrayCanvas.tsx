@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface ArrayCanvasProps {
   data: number[];
@@ -32,20 +33,21 @@ export function ArrayCanvas({
   pointers,
   className,
 }: ArrayCanvasProps) {
+  const themeColors = useThemeColors();
   const cellSize = Math.min(56, Math.max(32, 600 / data.length));
   const totalWidth = data.length * (cellSize + 4);
 
   function getCellColor(index: number): string {
     if (found && index === foundIndex) return VIZ_COLORS.completed;
     if (index === currentIndex) return VIZ_COLORS.active;
-    if (eliminated.includes(index)) return "#1e293b";
-    if (checked.includes(index)) return "#334155";
+    if (eliminated.includes(index)) return themeColors.bgSubtle;
+    if (checked.includes(index)) return themeColors.border;
     return VIZ_COLORS.default;
   }
 
   function getTextColor(index: number): string {
-    if (eliminated.includes(index)) return "#475569";
-    return "#e2e8f0";
+    if (eliminated.includes(index)) return themeColors.textSecondary;
+    return themeColors.text;
   }
 
   return (

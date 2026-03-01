@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import * as d3 from "d3";
 import type { HeatmapCell } from "@/lib/visualization/types";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface HeatmapCanvasProps {
   cells: HeatmapCell[];
@@ -37,6 +38,7 @@ export function HeatmapCanvas({
   showValues = true,
   className,
 }: HeatmapCanvasProps) {
+  const themeColors = useThemeColors();
   const values = cells.map((c) => c.value);
   const minVal = Math.min(...values, 0);
   const maxVal = Math.max(...values, 1);
@@ -104,7 +106,7 @@ export function HeatmapCanvas({
                           width: cellSize,
                           height: cellSize,
                           backgroundColor: bgColor,
-                          border: isCurrent ? "2px solid #fff" : "1px solid #1e293b",
+                          border: isCurrent ? `2px solid ${themeColors.text}` : `1px solid ${themeColors.bgSubtle}`,
                           borderRadius: 2,
                           color: textColor,
                           fontSize: Math.min(10, cellSize * 0.28),
