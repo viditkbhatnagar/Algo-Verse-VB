@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DifficultyBadge } from "@/components/shared/DifficultyBadge";
 import { CategoryIcon } from "@/components/shared/CategoryIcon";
+import { ProgressBadge } from "@/components/progress/ProgressBadge";
+import { BookmarkButton } from "@/components/progress/BookmarkButton";
 import type { AlgorithmMetadata } from "@/lib/visualization/types";
 
 interface AlgorithmCardProps {
@@ -14,10 +18,16 @@ export function AlgorithmCard({ algorithm }: AlgorithmCardProps) {
       <Card className="h-full bg-surface border-border hover:border-primary/50 transition-all duration-200 hover:shadow-lg hover:shadow-primary/5">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-foreground leading-tight">
-              {algorithm.name}
-            </h3>
-            <DifficultyBadge difficulty={algorithm.difficulty} />
+            <div className="flex items-center gap-2 min-w-0">
+              <ProgressBadge algorithmId={algorithm.id} variant="compact" />
+              <h3 className="font-semibold text-foreground leading-tight truncate">
+                {algorithm.name}
+              </h3>
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              <BookmarkButton algorithmId={algorithm.id} size="sm" />
+              <DifficultyBadge difficulty={algorithm.difficulty} />
+            </div>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <CategoryIcon category={algorithm.category} className="h-3 w-3" />

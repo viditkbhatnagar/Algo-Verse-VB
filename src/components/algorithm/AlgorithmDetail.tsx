@@ -13,12 +13,18 @@ import { Monitor } from "lucide-react";
 import type { AlgorithmMetadata } from "@/lib/visualization/types";
 import { getVisualization } from "@/visualizations/registry";
 import { AIChatPanel } from "@/components/ai/AIChatPanel";
+import { ProgressBadge } from "@/components/progress/ProgressBadge";
+import { BookmarkButton } from "@/components/progress/BookmarkButton";
+import { NoteEditor } from "@/components/notes/NoteEditor";
+import { useTimeTracking } from "@/hooks/useTimeTracking";
 
 interface AlgorithmDetailProps {
   algorithm: AlgorithmMetadata;
 }
 
 export function AlgorithmDetail({ algorithm }: AlgorithmDetailProps) {
+  useTimeTracking(algorithm.id);
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -32,6 +38,8 @@ export function AlgorithmDetail({ algorithm }: AlgorithmDetailProps) {
             <span>{algorithm.subcategory}</span>
           </Link>
           <DifficultyBadge difficulty={algorithm.difficulty} />
+          <ProgressBadge algorithmId={algorithm.id} />
+          <BookmarkButton algorithmId={algorithm.id} />
         </div>
         <h1 className="text-3xl font-bold text-foreground mb-3">
           {algorithm.name}
@@ -94,6 +102,9 @@ export function AlgorithmDetail({ algorithm }: AlgorithmDetailProps) {
 
       {/* AI Chat Panel */}
       <AIChatPanel algorithm={algorithm} />
+
+      {/* Notes */}
+      <NoteEditor algorithmId={algorithm.id} />
     </div>
   );
 }

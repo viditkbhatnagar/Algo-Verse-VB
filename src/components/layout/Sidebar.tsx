@@ -3,10 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, BookOpenText } from "lucide-react";
+import { ChevronDown, BookOpenText, BarChart3, Star } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { CategoryIcon } from "@/components/shared/CategoryIcon";
+import { CategoryProgress } from "@/components/progress/CategoryProgress";
 import { categories } from "@/data/categories";
 import { getAlgorithmsByCategory } from "@/data/algorithms";
 import { useUIStore } from "@/stores/ui";
@@ -31,6 +32,32 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         </h2>
       </div>
       <nav className="flex-1 overflow-y-auto scrollbar-thin p-2 space-y-0.5">
+        <Link
+          href="/progress"
+          onClick={onNavigate}
+          className={cn(
+            "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
+            pathname.startsWith("/progress")
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:bg-surface hover:text-foreground"
+          )}
+        >
+          <BarChart3 className="h-4 w-4 shrink-0" />
+          <span className="flex-1 text-left">Dashboard</span>
+        </Link>
+        <Link
+          href="/bookmarks"
+          onClick={onNavigate}
+          className={cn(
+            "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
+            pathname.startsWith("/bookmarks")
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:bg-surface hover:text-foreground"
+          )}
+        >
+          <Star className="h-4 w-4 shrink-0" />
+          <span className="flex-1 text-left">Bookmarks</span>
+        </Link>
         <Link
           href="/glossary"
           onClick={onNavigate}
@@ -66,6 +93,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
                   className="h-4 w-4 shrink-0"
                 />
                 <span className="flex-1 text-left truncate">{cat.name}</span>
+                <CategoryProgress categorySlug={cat.slug} />
                 <Badge
                   variant="outline"
                   className="h-5 px-1.5 text-[10px] border-border text-muted-foreground shrink-0"

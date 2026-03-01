@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Menu, Moon } from "lucide-react";
+import { Search, Menu, Moon, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -60,6 +60,27 @@ export function Navbar() {
 
         {/* Spacer on desktop */}
         <div className="hidden sm:block flex-1" />
+
+        {/* Dashboard link */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/progress">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="shrink-0 text-muted-foreground hover:text-foreground"
+                  aria-label="Dashboard"
+                >
+                  <BarChart3 className="h-5 w-5" />
+                </Button>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Learning Dashboard</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
         {/* Theme toggle placeholder */}
         <TooltipProvider>
