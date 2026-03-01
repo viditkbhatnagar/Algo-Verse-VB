@@ -1,0 +1,66 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: "#0a0a0a",
+        surface: "#1a1a2e",
+        primary: {
+          DEFAULT: "#6366f1",
+          foreground: "#ffffff",
+        },
+        accent: {
+          DEFAULT: "#22d3ee",
+          foreground: "#0a0a0a",
+        },
+        success: "#22c55e",
+        warning: "#f59e0b",
+        error: "#ef4444",
+        muted: {
+          DEFAULT: "#1e293b",
+          foreground: "#94a3b8",
+        },
+        border: "#334155",
+        ring: "#6366f1",
+        viz: {
+          default: "#475569",
+          active: "#6366f1",
+          comparing: "#f59e0b",
+          swapping: "#ef4444",
+          completed: "#22c55e",
+          highlighted: "#22d3ee",
+        },
+      },
+      fontFamily: {
+        sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+      },
+      borderRadius: {
+        lg: "12px",
+        md: "8px",
+        sm: "6px",
+      },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-in-right": {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.3s ease-out",
+        "slide-in-right": "slide-in-right 0.3s ease-out",
+      },
+    },
+  },
+  plugins: [require("@tailwindcss/typography")],
+};
