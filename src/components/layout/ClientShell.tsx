@@ -42,9 +42,9 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
         <NavigationProgress />
       </Suspense>
       <Navbar />
-      <div className="flex">
+      <div className="flex overflow-x-hidden">
         <Sidebar />
-        <main className="flex-1 lg:ml-[280px] min-h-[calc(100vh-56px)] mt-14 pb-16 md:pb-0">
+        <main className="flex-1 min-w-0 lg:ml-[280px] min-h-[calc(100vh-56px)] mt-14 pb-16 md:pb-0">
           {children}
         </main>
       </div>

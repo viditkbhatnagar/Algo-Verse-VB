@@ -42,7 +42,7 @@ export function AlgorithmGrid({ algorithms, categories }: AlgorithmGridProps) {
       {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-6">
         <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-          <SelectTrigger className="w-[200px] bg-surface border-border">
+          <SelectTrigger className="w-full sm:w-[200px] bg-surface border-border">
             <SelectValue placeholder="All Categories" />
           </SelectTrigger>
           <SelectContent className="bg-surface border-border">
@@ -56,7 +56,7 @@ export function AlgorithmGrid({ algorithms, categories }: AlgorithmGridProps) {
         </Select>
 
         <Select value={sortBy} onValueChange={(v) => setSortBy(v as "name" | "difficulty")}>
-          <SelectTrigger className="w-[160px] bg-surface border-border">
+          <SelectTrigger className="w-full sm:w-[160px] bg-surface border-border">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="bg-surface border-border">

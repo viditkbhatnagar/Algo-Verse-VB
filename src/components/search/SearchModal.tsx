@@ -28,7 +28,7 @@ export function SearchModal() {
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/60 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
           className={cn(
-            "fixed left-[50%] top-[20%] z-50 w-full max-w-[550px] translate-x-[-50%]",
+            "fixed left-[50%] top-[10%] sm:top-[20%] z-50 w-[calc(100%-2rem)] sm:w-full max-w-[550px] translate-x-[-50%]",
             "rounded-lg border border-border bg-background shadow-2xl",
             "duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
@@ -48,7 +48,7 @@ export function SearchModal() {
             query={query}
             onSelect={handleClose}
           />
-          <div className="flex items-center justify-between border-t border-border px-4 py-2 text-[10px] text-muted-foreground">
+          <div className="hidden sm:flex items-center justify-between border-t border-border px-4 py-2 text-[10px] text-muted-foreground">
             <div className="flex items-center gap-3">
               <span>
                 <kbd className="rounded border border-border bg-surface px-1 py-0.5">↑↓</kbd> Navigate

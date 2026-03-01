@@ -13,7 +13,7 @@ export default function AlgorithmsPage() {
   const categories = getAllCategories();
 
   return (
-    <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <Breadcrumbs />
       <h1 className="text-3xl font-bold text-foreground mb-2">
         All Algorithms

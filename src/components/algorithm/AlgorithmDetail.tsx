@@ -41,7 +41,7 @@ export function AlgorithmDetail({ algorithm }: AlgorithmDetailProps) {
           <ProgressBadge algorithmId={algorithm.id} />
           <BookmarkButton algorithmId={algorithm.id} />
         </div>
-        <h1 className="text-3xl font-bold text-foreground mb-3">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
           {algorithm.name}
         </h1>
         <div className="flex flex-wrap gap-1.5">

@@ -36,7 +36,7 @@ export default function CategoryPage({ params }: PageProps) {
   const algorithms = getAlgorithmsByCategory(category.slug);
 
   return (
-    <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       <Breadcrumbs />
 
       {/* Category header */}

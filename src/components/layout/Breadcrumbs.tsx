@@ -42,7 +42,7 @@ export function Breadcrumbs() {
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6 overflow-x-auto scrollbar-thin">
       {crumbs.map((crumb, i) => {
         const isLast = i === crumbs.length - 1;
         return (

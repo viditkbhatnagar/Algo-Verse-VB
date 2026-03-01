@@ -186,7 +186,7 @@ export function SearchResults({
   let itemIndex = 0;
 
   return (
-    <div ref={scrollRef} className="max-h-[400px] overflow-y-auto">
+    <div ref={scrollRef} className="max-h-[60vh] sm:max-h-[400px] overflow-y-auto">
       {showRecents && (
         <div>
           <div className="flex items-center justify-between px-4 py-2">

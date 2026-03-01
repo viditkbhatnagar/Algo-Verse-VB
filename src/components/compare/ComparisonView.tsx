@@ -26,7 +26,7 @@ export function ComparisonView({
   const Viz2 = getVisualization(algorithm2.id);
 
   return (
-    <div className="p-4 lg:p-6 max-w-[1600px] mx-auto space-y-6">
+    <div className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6">
       {/* Back link */}
       <Link
         href="/compare"
@@ -38,7 +38,7 @@ export function ComparisonView({
 
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-xl sm:text-2xl font-bold">
           <span className="text-primary">{algorithm1.name}</span>
           <span className="text-muted-foreground mx-3">vs</span>
           <span className="text-accent">{algorithm2.name}</span>

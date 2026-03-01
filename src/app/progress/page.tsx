@@ -71,7 +71,7 @@ export default function ProgressPage() {
     .slice(0, 10);
 
   return (
-    <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-8">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-8">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-foreground">Learning Dashboard</h1>
@@ -81,8 +81,8 @@ export default function ProgressPage() {
       </div>
 
       {/* Overall Progress */}
-      <div className="rounded-xl border border-border bg-surface p-6">
-        <div className="flex items-center gap-6">
+      <div className="rounded-xl border border-border bg-surface p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
           <div className="text-center">
             <p className="text-5xl font-bold text-primary">{overallPercentage}%</p>
             <p className="text-sm text-muted-foreground mt-1">Overall Progress</p>
@@ -98,7 +98,7 @@ export default function ProgressPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <StatsCard icon={BookOpen} label="Studied" value={studied} />
         <StatsCard icon={CheckCircle2} label="Understood" value={understood} />
         <StatsCard icon={Star} label="Bookmarked" value={bookmarks.length} />
@@ -116,7 +116,7 @@ export default function ProgressPage() {
       </div>
 
       {/* Streak Calendar */}
-      <div className="rounded-xl border border-border bg-surface p-6">
+      <div className="rounded-xl border border-border bg-surface p-4 sm:p-6 overflow-hidden">
         <StreakCalendar />
       </div>
 

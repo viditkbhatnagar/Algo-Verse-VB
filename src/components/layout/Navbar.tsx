@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-14 border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="flex h-full items-center px-4 gap-4">
+      <div className="flex h-full items-center px-3 gap-2 sm:px-4 sm:gap-4">
         {/* Hamburger — tablet and below */}
         <Button
           variant="ghost"

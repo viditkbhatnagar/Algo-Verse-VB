@@ -46,20 +46,22 @@ export function CodeBlock({ implementations }: CodeBlockProps) {
                 <Copy className="h-4 w-4" />
               )}
             </Button>
-            <SyntaxHighlighter
-              language={lang}
-              style={vscDarkPlus}
-              customStyle={{
-                margin: 0,
-                borderRadius: "8px",
-                border: "1px solid #334155",
-                backgroundColor: "#1a1a2e",
-                fontSize: "13px",
-              }}
-              showLineNumbers
-            >
-              {implementations[lang].trim()}
-            </SyntaxHighlighter>
+            <div className="overflow-x-auto">
+              <SyntaxHighlighter
+                language={lang}
+                style={vscDarkPlus}
+                customStyle={{
+                  margin: 0,
+                  borderRadius: "8px",
+                  border: "1px solid #334155",
+                  backgroundColor: "#1a1a2e",
+                  fontSize: "13px",
+                }}
+                showLineNumbers
+              >
+                {implementations[lang].trim()}
+              </SyntaxHighlighter>
+            </div>
           </TabsContent>
         ))}
       </Tabs>
