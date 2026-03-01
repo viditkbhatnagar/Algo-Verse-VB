@@ -14,7 +14,7 @@ interface GridCanvasProps {
   className?: string;
 }
 
-const COLOR_MAP: Record<HighlightColor | "default", string> = {
+const COLOR_MAP: Record<string, string> = {
   default: "transparent",
   active: VIZ_COLORS.active,
   comparing: VIZ_COLORS.comparing,

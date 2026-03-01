@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { VIZ_COLORS } from "@/lib/constants";
 import type { VisualizationStep, SortingStepData, HighlightColor } from "@/lib/visualization/types";
 
-const COLOR_MAP: Record<HighlightColor | "default", string> = {
+const COLOR_MAP: Record<string, string> = {
   default: VIZ_COLORS.default,
   active: VIZ_COLORS.active,
   comparing: VIZ_COLORS.comparing,

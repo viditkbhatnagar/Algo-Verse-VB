@@ -35,6 +35,13 @@ module.exports = {
           swapping: "#ef4444",
           completed: "#22c55e",
           highlighted: "#22d3ee",
+          "neuron-input": "#3b82f6",
+          "neuron-hidden": "#8b5cf6",
+          "neuron-output": "#f97316",
+          gradient: "#ec4899",
+          centroid: "#f97316",
+          boundary: "#22d3ee",
+          token: "#6366f1",
         },
       },
       fontFamily: {

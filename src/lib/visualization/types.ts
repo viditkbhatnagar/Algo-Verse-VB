@@ -91,7 +91,29 @@ export type StepAction =
   | "mark-mst"
   | "union"
   | "slide-window"
-  | "move-pointer";
+  | "move-pointer"
+  // Phase 5: ML/DL/NLP/RL actions
+  | "train"
+  | "predict"
+  | "classify"
+  | "cluster"
+  | "update-weights"
+  | "compute-gradient"
+  | "activate"
+  | "pool"
+  | "convolve"
+  | "attend"
+  | "encode"
+  | "decode"
+  | "tokenize"
+  | "embed"
+  | "explore-state"
+  | "exploit"
+  | "update-q"
+  | "fit-line"
+  | "assign-cluster"
+  | "update-centroid"
+  | "split-node";
 
 export type HighlightColor =
   | "active"
@@ -103,7 +125,25 @@ export type HighlightColor =
   | "mst-edge"
   | "relaxed"
   | "backtracked"
-  | "window";
+  | "window"
+  // Phase 5: ML/DL/NLP/RL colors
+  | "neuron-input"
+  | "neuron-hidden"
+  | "neuron-output"
+  | "positive-weight"
+  | "negative-weight"
+  | "gradient"
+  | "cluster-0"
+  | "cluster-1"
+  | "cluster-2"
+  | "cluster-3"
+  | "attention-high"
+  | "attention-low"
+  | "token"
+  | "centroid"
+  | "boundary"
+  | "reward-positive"
+  | "reward-negative";
 
 export interface HighlightInfo {
   indices: number[];
@@ -272,4 +312,188 @@ export interface ArrayWithPointersStepData {
   highlights: HighlightInfo[];
   result?: (number | string)[];
   currentValue?: number | string;
+}
+
+// --- Phase 5: ML/DL/NLP/RL step data shapes ---
+
+export interface ScatterPoint {
+  x: number;
+  y: number;
+  label?: number | string;
+  highlight?: HighlightColor;
+  id?: string;
+}
+
+export interface DecisionBoundary {
+  type: "line" | "curve" | "region";
+  points: { x: number; y: number }[];
+  color?: string;
+  label?: string;
+}
+
+export interface ScatterStepData {
+  points: ScatterPoint[];
+  centroids?: ScatterPoint[];
+  supportVectors?: number[];
+  boundaries?: DecisionBoundary[];
+  xLabel?: string;
+  yLabel?: string;
+  xRange?: [number, number];
+  yRange?: [number, number];
+  kNearest?: number[];
+  queryPoint?: ScatterPoint;
+  regressionLine?: { x: number; y: number }[];
+  epoch?: number;
+  lossValue?: number;
+}
+
+export interface NeuronData {
+  id: string;
+  layer: number;
+  index: number;
+  value?: number;
+  label?: string;
+  highlight?: HighlightColor;
+  isDropped?: boolean;
+  gradient?: number;
+}
+
+export interface ConnectionData {
+  source: string;
+  target: string;
+  weight: number;
+  highlight?: HighlightColor;
+  gradient?: number;
+}
+
+export interface NeuralNetStepData {
+  layers: { label: string; type: "input" | "hidden" | "output" | "conv" | "pool" | "attention" }[];
+  neurons: NeuronData[];
+  connections: ConnectionData[];
+  currentLayer?: number;
+  activationFunction?: string;
+  lossValue?: number;
+  epoch?: number;
+  dataFlowDirection?: "forward" | "backward";
+}
+
+export interface TrainingCurvePoint {
+  epoch: number;
+  trainLoss?: number;
+  valLoss?: number;
+  trainAccuracy?: number;
+  valAccuracy?: number;
+  learningRate?: number;
+}
+
+export interface LossChartStepData {
+  history: TrainingCurvePoint[];
+  currentEpoch: number;
+  curves: { key: string; label: string; color: string }[];
+  annotations?: { epoch: number; label: string }[];
+}
+
+export interface TokenData {
+  id: string;
+  text: string;
+  type?: string;
+  highlight?: HighlightColor;
+  position?: number;
+}
+
+export interface TokenConnection {
+  source: string;
+  target: string;
+  weight?: number;
+  label?: string;
+  highlight?: HighlightColor;
+}
+
+export interface TokenStepData {
+  tokens: TokenData[];
+  connections?: TokenConnection[];
+  outputTokens?: TokenData[];
+  processingIndex?: number;
+  vocabulary?: { token: string; count: number }[];
+}
+
+export interface HeatmapCell {
+  row: number;
+  col: number;
+  value: number;
+  highlight?: HighlightColor;
+}
+
+export interface HeatmapStepData {
+  cells: HeatmapCell[];
+  rows: number;
+  cols: number;
+  rowLabels: string[];
+  colLabels: string[];
+  colorScale?: "attention" | "confusion" | "tfidf" | "generic";
+  currentCell?: [number, number];
+  title?: string;
+}
+
+export interface RLState {
+  id: string;
+  x: number;
+  y: number;
+  label: string;
+  value?: number;
+  reward?: number;
+  highlight?: HighlightColor;
+  isTerminal?: boolean;
+}
+
+export interface RLAction {
+  from: string;
+  to: string;
+  label?: string;
+  probability?: number;
+  reward?: number;
+  highlight?: HighlightColor;
+}
+
+export interface RLStepData {
+  states: RLState[];
+  actions: RLAction[];
+  currentState?: string;
+  qTable?: Record<string, Record<string, number>>;
+  policy?: Record<string, string>;
+  epsilon?: number;
+  totalReward?: number;
+  episode?: number;
+}
+
+export interface FunctionPlotPoint {
+  x: number;
+  y: number;
+}
+
+export interface FunctionPlotStepData {
+  functions: {
+    name: string;
+    points: FunctionPlotPoint[];
+    color: string;
+    active?: boolean;
+  }[];
+  currentX?: number;
+  xLabel?: string;
+  yLabel?: string;
+  xRange: [number, number];
+  yRange: [number, number];
+  annotations?: { x: number; y: number; label: string }[];
+  gradientArrow?: { x: number; y: number; dx: number; dy: number };
+}
+
+export interface ConvolutionStepData {
+  input: number[][];
+  kernel: number[][];
+  output: number[][];
+  kernelPosition?: [number, number];
+  padding?: number;
+  stride?: number;
+  currentOutputCell?: [number, number];
+  computationDetail?: string;
 }

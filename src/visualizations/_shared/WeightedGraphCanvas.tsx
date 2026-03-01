@@ -21,7 +21,7 @@ interface WeightedGraphCanvasProps {
 
 const NODE_RADIUS = 22;
 
-const COLOR_MAP: Record<HighlightColor, string> = {
+const COLOR_MAP: Record<string, string> = {
   active: VIZ_COLORS.active,
   comparing: VIZ_COLORS.comparing,
   swapping: VIZ_COLORS.swapping,

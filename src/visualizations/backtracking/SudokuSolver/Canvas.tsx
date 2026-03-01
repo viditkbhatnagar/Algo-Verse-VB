@@ -10,7 +10,7 @@ interface SudokuCanvasProps {
 
 const CELL_SIZE = 44;
 
-const COLOR_MAP: Record<HighlightColor | "default", string> = {
+const COLOR_MAP: Record<string, string> = {
   default: "transparent",
   active: VIZ_COLORS.active,
   comparing: VIZ_COLORS.comparing,

@@ -12,7 +12,7 @@ interface TwoPointerCanvasProps {
   step: VisualizationStep;
 }
 
-const COLOR_MAP: Record<HighlightColor | "default", string> = {
+const COLOR_MAP: Record<string, string> = {
   default: VIZ_COLORS.default,
   active: VIZ_COLORS.active,
   comparing: VIZ_COLORS.comparing,

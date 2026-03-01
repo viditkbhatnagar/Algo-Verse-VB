@@ -10,7 +10,27 @@ export const VIZ_COLORS = {
   relaxed: "#06b6d4",
   backtracked: "#f87171",
   window: "#a78bfa",
+  // Phase 5: ML/DL/NLP/RL colors
+  neuronInput: "#3b82f6",
+  neuronHidden: "#8b5cf6",
+  neuronOutput: "#f97316",
+  positiveWeight: "#22c55e",
+  negativeWeight: "#ef4444",
+  gradient: "#ec4899",
+  centroid: "#f97316",
+  boundary: "#22d3ee",
+  rewardPositive: "#22c55e",
+  rewardNegative: "#ef4444",
+  token: "#6366f1",
+  attentionHigh: "#ef4444",
+  attentionLow: "#1e293b",
 } as const;
+
+// Cluster color palette (for scatter plots with multiple classes)
+export const CLUSTER_COLORS = [
+  "#6366f1", "#f59e0b", "#22d3ee", "#a855f7",
+  "#22c55e", "#f97316", "#ec4899", "#14b8a6",
+] as const;
 
 // Playback speeds
 export const PLAYBACK_SPEEDS = [0.25, 0.5, 1, 1.5, 2, 4] as const;

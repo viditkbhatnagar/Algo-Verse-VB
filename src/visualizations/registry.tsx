@@ -254,6 +254,279 @@ const visualizationRegistry: Record<string, ComponentType> = {
     () => import("@/visualizations/backtracking/SudokuSolver"),
     { ssr: false, loading: LoadingSpinner }
   ),
+  // Machine Learning
+  knn: dynamic(
+    () => import("@/visualizations/machine-learning/KNN"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  svm: dynamic(
+    () => import("@/visualizations/machine-learning/SVM"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "k-means": dynamic(
+    () => import("@/visualizations/machine-learning/KMeans"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  dbscan: dynamic(
+    () => import("@/visualizations/machine-learning/DBSCAN"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "linear-regression": dynamic(
+    () => import("@/visualizations/machine-learning/LinearRegression"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "polynomial-regression": dynamic(
+    () => import("@/visualizations/machine-learning/PolynomialRegression"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "logistic-regression": dynamic(
+    () => import("@/visualizations/machine-learning/LogisticRegression"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  pca: dynamic(
+    () => import("@/visualizations/machine-learning/PCA"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "gradient-descent": dynamic(
+    () => import("@/visualizations/machine-learning/GradientDescent"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  sgd: dynamic(
+    () => import("@/visualizations/machine-learning/SGD"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "mini-batch-gd": dynamic(
+    () => import("@/visualizations/machine-learning/MiniBatchGD"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "cross-validation": dynamic(
+    () => import("@/visualizations/machine-learning/CrossValidation"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "confusion-matrix": dynamic(
+    () => import("@/visualizations/machine-learning/ConfusionMatrix"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "roc-auc": dynamic(
+    () => import("@/visualizations/machine-learning/ROCAUC"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "feature-scaling": dynamic(
+    () => import("@/visualizations/machine-learning/FeatureScaling"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "decision-tree-ml": dynamic(
+    () => import("@/visualizations/machine-learning/DecisionTree"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "random-forest": dynamic(
+    () => import("@/visualizations/machine-learning/RandomForest"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "naive-bayes": dynamic(
+    () => import("@/visualizations/machine-learning/NaiveBayes"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "bias-variance-tradeoff": dynamic(
+    () => import("@/visualizations/machine-learning/BiasVarianceTradeoff"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  regularization: dynamic(
+    () => import("@/visualizations/machine-learning/Regularization"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  // Deep Learning
+  convolution: dynamic(
+    () => import("@/visualizations/deep-learning/Convolution"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  padding: dynamic(
+    () => import("@/visualizations/deep-learning/Padding"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  stride: dynamic(
+    () => import("@/visualizations/deep-learning/Stride"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  pooling: dynamic(
+    () => import("@/visualizations/deep-learning/Pooling"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "cnn-architecture": dynamic(
+    () => import("@/visualizations/deep-learning/CNNArchitecture"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "vanilla-rnn": dynamic(
+    () => import("@/visualizations/deep-learning/VanillaRNN"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  lstm: dynamic(
+    () => import("@/visualizations/deep-learning/LSTM"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  gru: dynamic(
+    () => import("@/visualizations/deep-learning/GRU"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  seq2seq: dynamic(
+    () => import("@/visualizations/deep-learning/Seq2Seq"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  perceptron: dynamic(
+    () => import("@/visualizations/deep-learning/Perceptron"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  mlp: dynamic(
+    () => import("@/visualizations/deep-learning/MLP"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "forward-pass": dynamic(
+    () => import("@/visualizations/deep-learning/ForwardPass"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  backpropagation: dynamic(
+    () => import("@/visualizations/deep-learning/Backpropagation"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "activation-functions": dynamic(
+    () => import("@/visualizations/deep-learning/ActivationFunctions"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "loss-functions": dynamic(
+    () => import("@/visualizations/deep-learning/LossFunctions"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  dropout: dynamic(
+    () => import("@/visualizations/deep-learning/Dropout"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "vanishing-gradients": dynamic(
+    () => import("@/visualizations/deep-learning/VanishingGradients"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "sgd-momentum": dynamic(
+    () => import("@/visualizations/deep-learning/SGDMomentum"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "adam-optimizer": dynamic(
+    () => import("@/visualizations/deep-learning/AdamOptimizer"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  // Transformer / Attention
+  "self-attention": dynamic(
+    () => import("@/visualizations/deep-learning/SelfAttention"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "multi-head-attention": dynamic(
+    () => import("@/visualizations/deep-learning/MultiHeadAttention"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "positional-encoding": dynamic(
+    () => import("@/visualizations/deep-learning/PositionalEncoding"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "transformer-block": dynamic(
+    () => import("@/visualizations/deep-learning/TransformerBlock"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "full-transformer": dynamic(
+    () => import("@/visualizations/deep-learning/FullTransformer"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "masked-self-attention": dynamic(
+    () => import("@/visualizations/deep-learning/MaskedSelfAttention"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  // Reinforcement Learning
+  mdp: dynamic(
+    () => import("@/visualizations/reinforcement-learning/MDP"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "q-learning": dynamic(
+    () => import("@/visualizations/reinforcement-learning/QLearning"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "multi-armed-bandit": dynamic(
+    () => import("@/visualizations/reinforcement-learning/MultiArmedBandit"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "bellman-equation": dynamic(
+    () => import("@/visualizations/reinforcement-learning/BellmanEquation"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "epsilon-greedy": dynamic(
+    () => import("@/visualizations/reinforcement-learning/EpsilonGreedy"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  // NLP
+  tokenization: dynamic(
+    () => import("@/visualizations/nlp/Tokenization"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  stemming: dynamic(
+    () => import("@/visualizations/nlp/Stemming"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  lemmatization: dynamic(
+    () => import("@/visualizations/nlp/Lemmatization"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "n-grams": dynamic(
+    () => import("@/visualizations/nlp/NGrams"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "bag-of-words": dynamic(
+    () => import("@/visualizations/nlp/BagOfWords"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "tf-idf": dynamic(
+    () => import("@/visualizations/nlp/TFIDF"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "word2vec-cbow": dynamic(
+    () => import("@/visualizations/nlp/Word2VecCBOW"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "word2vec-skip-gram": dynamic(
+    () => import("@/visualizations/nlp/Word2VecSkipGram"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "word-embeddings": dynamic(
+    () => import("@/visualizations/nlp/WordEmbeddings"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "one-hot-encoding": dynamic(
+    () => import("@/visualizations/nlp/OneHotEncoding"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "cosine-similarity": dynamic(
+    () => import("@/visualizations/nlp/CosineSimilarity"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "bert-architecture": dynamic(
+    () => import("@/visualizations/nlp/BERTArchitecture"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "gpt-architecture": dynamic(
+    () => import("@/visualizations/nlp/GPTArchitecture"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  ner: dynamic(
+    () => import("@/visualizations/nlp/NER"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "attention-visualization": dynamic(
+    () => import("@/visualizations/nlp/AttentionVisualization"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  bpe: dynamic(
+    () => import("@/visualizations/nlp/BPE"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
+  "beam-search": dynamic(
+    () => import("@/visualizations/nlp/BeamSearch"),
+    { ssr: false, loading: LoadingSpinner }
+  ),
 };
 
 export function getVisualization(algorithmId: string): ComponentType | null {

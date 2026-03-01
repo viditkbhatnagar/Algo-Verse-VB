@@ -23,7 +23,7 @@ const NODE_RADIUS = 20;
 const LEVEL_HEIGHT = 70;
 const MIN_NODE_SPACING = 50;
 
-const COLOR_MAP: Record<HighlightColor | "default", string> = {
+const COLOR_MAP: Record<string, string> = {
   default: VIZ_COLORS.default,
   active: VIZ_COLORS.active,
   comparing: VIZ_COLORS.comparing,
