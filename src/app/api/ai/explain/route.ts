@@ -29,7 +29,25 @@ export async function POST(req: NextRequest) {
     return new Response("Rate limit exceeded", { status: 429 });
   }
 
-  const { term, context } = await req.json();
+  let term: string;
+  let context: string | undefined;
+  try {
+    const body = await req.json();
+    term = body.term;
+    context = body.context;
+  } catch {
+    return new Response(
+      JSON.stringify({ error: "Invalid JSON body" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  if (!term || typeof term !== "string") {
+    return new Response(
+      JSON.stringify({ error: "Missing or invalid 'term' field" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
 
   const stream = await getOpenAI().chat.completions.create({
     model: "gpt-4o-mini",
@@ -49,13 +67,17 @@ export async function POST(req: NextRequest) {
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
     async start(controller) {
-      for await (const chunk of stream) {
-        const text = chunk.choices[0]?.delta?.content || "";
-        if (text) {
-          controller.enqueue(encoder.encode(text));
+      try {
+        for await (const chunk of stream) {
+          const text = chunk.choices[0]?.delta?.content || "";
+          if (text) {
+            controller.enqueue(encoder.encode(text));
+          }
         }
+        controller.close();
+      } catch (err) {
+        controller.error(err);
       }
-      controller.close();
     },
   });
 

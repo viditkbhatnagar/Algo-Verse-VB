@@ -51,7 +51,8 @@ export function getTermsByCategory(category: string): GlossaryTermData[] {
 }
 
 export function getTermsByLetter(letter: string): GlossaryTermData[] {
-  return allTermsArray.filter(
-    (t) => t.name[0].toUpperCase() === letter.toUpperCase()
-  );
+  return allTermsArray.filter((t) => {
+    const firstChar = t.name?.[0];
+    return typeof firstChar === "string" && firstChar.toUpperCase() === letter.toUpperCase();
+  });
 }

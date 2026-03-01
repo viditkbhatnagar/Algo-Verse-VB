@@ -25,8 +25,10 @@ export function GlossaryTermInline({ slug, children }: GlossaryTermProps) {
 
   const handleClick = useCallback(() => {
     const resolved = getTermBySlug(slug) || getTermBySlug(nameToSlug(slug));
-    setTerm(resolved || null);
-    setOpen(true);
+    if (resolved) {
+      setTerm(resolved);
+      setOpen(true);
+    }
   }, [slug]);
 
   return (

@@ -1,57 +1,27 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
-import katex from "katex";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 interface MarkdownRendererProps {
   content: string;
   className?: string;
 }
 
-function processKaTeX(text: string): string {
-  // Replace $$...$$ with block math
-  let result = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, latex) => {
-    try {
-      return katex.renderToString(latex.trim(), {
-        displayMode: true,
-        throwOnError: false,
-      });
-    } catch {
-      return `$$${latex}$$`;
-    }
-  });
-
-  // Replace $...$ with inline math (not preceded by another $)
-  result = result.replace(/(?<!\$)\$([^$\n]+?)\$(?!\$)/g, (_, latex) => {
-    try {
-      return katex.renderToString(latex.trim(), {
-        displayMode: false,
-        throwOnError: false,
-      });
-    } catch {
-      return `$${latex}$`;
-    }
-  });
-
-  return result;
-}
-
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
-  const processed = processKaTeX(content);
-
   return (
     <div className={className}>
       <ReactMarkdown
+        remarkPlugins={[remarkMath]}
+        rehypePlugins={[rehypeKatex]}
         components={{
           p: ({ children, ...props }) => (
             <p
               {...props}
               className="mb-3 text-muted-foreground leading-relaxed"
-              dangerouslySetInnerHTML={
-                typeof children === "string" ? { __html: children } : undefined
-              }
             >
-              {typeof children !== "string" ? children : undefined}
+              {children}
             </p>
           ),
           code: ({ children, className: codeClassName, ...props }) => {
@@ -94,7 +64,7 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           ),
         }}
       >
-        {processed}
+        {content}
       </ReactMarkdown>
     </div>
   );

@@ -40,10 +40,40 @@ export async function POST(req: NextRequest) {
     return new Response("Rate limit exceeded", { status: 429 });
   }
 
-  const { messages, algorithmContext } = (await req.json()) as {
-    messages: ChatMessage[];
+  let body: { messages?: unknown; algorithmContext?: AlgorithmContext };
+  try {
+    body = await req.json();
+  } catch {
+    return new Response(
+      JSON.stringify({ error: "Invalid JSON body" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  const { messages, algorithmContext } = body as {
+    messages?: unknown;
     algorithmContext?: AlgorithmContext;
   };
+
+  if (
+    !Array.isArray(messages) ||
+    messages.length === 0 ||
+    !messages.every(
+      (m) =>
+        typeof m === "object" &&
+        m !== null &&
+        typeof m.role === "string" &&
+        typeof m.content === "string" &&
+        (m.role === "user" || m.role === "assistant")
+    )
+  ) {
+    return new Response(
+      JSON.stringify({ error: "Invalid messages: expected a non-empty array of {role, content} objects" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  const validMessages = messages as ChatMessage[];
 
   let systemContent = SYSTEM_PROMPT_CHAT;
   if (algorithmContext) {
@@ -56,20 +86,24 @@ export async function POST(req: NextRequest) {
     max_tokens: 1000,
     messages: [
       { role: "system", content: systemContent },
-      ...messages.map((m) => ({ role: m.role as "user" | "assistant", content: m.content })),
+      ...validMessages.map((m) => ({ role: m.role as "user" | "assistant", content: m.content })),
     ],
   });
 
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
     async start(controller) {
-      for await (const chunk of stream) {
-        const text = chunk.choices[0]?.delta?.content || "";
-        if (text) {
-          controller.enqueue(encoder.encode(text));
+      try {
+        for await (const chunk of stream) {
+          const text = chunk.choices[0]?.delta?.content || "";
+          if (text) {
+            controller.enqueue(encoder.encode(text));
+          }
         }
+        controller.close();
+      } catch (err) {
+        controller.error(err);
       }
-      controller.close();
     },
   });
 
