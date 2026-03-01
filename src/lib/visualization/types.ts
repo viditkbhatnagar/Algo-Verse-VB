@@ -93,3 +93,51 @@ export interface VisualizationStep {
   codeLineHighlight?: number;
   variables?: Record<string, unknown>;
 }
+
+// --- Step data shapes for specific visualization types ---
+
+export interface SortingStepData {
+  array: number[];
+  highlights: HighlightInfo[];
+  positionMap?: number[]; // positionMap[currentIndex] = originalIndex (for bar identity tracking)
+  auxiliaryArrays?: { label: string; data: number[] }[];
+  subarrays?: { startIndex: number; endIndex: number; level: number; label?: string }[];
+  heapSize?: number;
+  buckets?: { label: string; items: number[] }[];
+}
+
+export interface GraphNode {
+  id: string;
+  x: number;
+  y: number;
+  label: string;
+}
+
+export interface GraphEdge {
+  source: string;
+  target: string;
+}
+
+export interface GraphStepData {
+  nodes: GraphNode[];
+  edges: GraphEdge[];
+  nodeStates: Record<string, "unvisited" | "visiting" | "visited">;
+  currentNode: string | null;
+  dataStructure: {
+    type: "stack" | "queue";
+    items: string[];
+  };
+  visitOrder: string[];
+}
+
+export interface SearchStepData {
+  array: number[];
+  target: number;
+  currentIndex: number;
+  low?: number;
+  mid?: number;
+  high?: number;
+  eliminated: number[]; // indices that are grayed out
+  found: boolean;
+  checked: number[]; // indices already checked
+}

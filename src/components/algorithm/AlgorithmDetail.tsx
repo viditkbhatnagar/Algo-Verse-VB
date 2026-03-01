@@ -11,6 +11,7 @@ import { RelatedAlgorithms } from "@/components/algorithm/RelatedAlgorithms";
 import { UseCases } from "@/components/algorithm/UseCases";
 import { Monitor } from "lucide-react";
 import type { AlgorithmMetadata } from "@/lib/visualization/types";
+import { getVisualization } from "@/visualizations/registry";
 
 interface AlgorithmDetailProps {
   algorithm: AlgorithmMetadata;
@@ -56,13 +57,21 @@ export function AlgorithmDetail({ algorithm }: AlgorithmDetailProps) {
         ))}
       </div>
 
-      {/* Visualization Placeholder */}
-      <div className="rounded-md border-2 border-dashed border-border bg-surface/30 p-8 text-center">
-        <Monitor className="h-10 w-10 mx-auto mb-3 text-muted-foreground/40" />
-        <p className="text-sm text-muted-foreground">
-          Interactive visualization coming in Phase 2
-        </p>
-      </div>
+      {/* Visualization */}
+      {(() => {
+        const VizComponent = getVisualization(algorithm.id);
+        if (VizComponent) {
+          return <VizComponent />;
+        }
+        return (
+          <div className="rounded-md border-2 border-dashed border-border bg-surface/30 p-8 text-center">
+            <Monitor className="h-10 w-10 mx-auto mb-3 text-muted-foreground/40" />
+            <p className="text-sm text-muted-foreground">
+              Visualization coming soon
+            </p>
+          </div>
+        );
+      })()}
 
       {/* Pseudocode */}
       <PseudocodeBlock pseudocode={algorithm.pseudocode} />

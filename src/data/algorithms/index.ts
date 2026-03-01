@@ -7,6 +7,8 @@ import { insertionSort } from "./sorting/insertion-sort";
 import { mergeSort } from "./sorting/merge-sort";
 import { quickSort } from "./sorting/quick-sort";
 import { heapSort } from "./sorting/heap-sort";
+import { countingSort } from "./sorting/counting-sort";
+import { radixSort } from "./sorting/radix-sort";
 
 // Searching
 import { linearSearch } from "./searching/linear-search";
@@ -38,6 +40,8 @@ const algorithms: AlgorithmMetadata[] = [
   mergeSort,
   quickSort,
   heapSort,
+  countingSort,
+  radixSort,
   // Searching
   linearSearch,
   binarySearch,
