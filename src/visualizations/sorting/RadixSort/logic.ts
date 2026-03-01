@@ -5,6 +5,8 @@ export function generateRadixSortSteps(input: number[]): VisualizationStep[] {
   const n = arr.length;
   const steps: VisualizationStep[] = [];
   let stepId = 0;
+  if (n === 0) return steps;
+
   const max = Math.max(...arr);
   const maxDigits = max === 0 ? 1 : Math.floor(Math.log10(max)) + 1;
 

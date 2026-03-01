@@ -32,13 +32,17 @@ export function generateBubbleSortSteps(input: number[]): VisualizationStep[] {
       });
 
       if (arr[j] > arr[j + 1]) {
+        // Capture pre-swap values for accurate description
+        const left = arr[j];
+        const right = arr[j + 1];
+
         // Swap step
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
         swapped = true;
 
         steps.push({
           id: stepId++,
-          description: `Swapping ${arr[j + 1]} and ${arr[j]} (${arr[j + 1]} > ${arr[j]})`,
+          description: `Swapping ${left} and ${right} (${left} > ${right})`,
           action: "swap",
           highlights: [{ indices: [j, j + 1], color: "swapping" }],
           data: {

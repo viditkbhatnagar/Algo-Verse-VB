@@ -65,10 +65,14 @@ export function generateSelectionSortSteps(input: number[]): VisualizationStep[]
     }
 
     if (minIdx !== i) {
+      // Capture pre-swap values for accurate description
+      const valI = arr[i];
+      const valMin = arr[minIdx];
+
       [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
       steps.push({
         id: stepId++,
-        description: `Swapping ${arr[minIdx]} (pos ${minIdx}) with ${arr[i]} (pos ${i})`,
+        description: `Swapping ${valMin} (pos ${minIdx}) with ${valI} (pos ${i})`,
         action: "swap",
         highlights: [{ indices: [i, minIdx], color: "swapping" }],
         data: {

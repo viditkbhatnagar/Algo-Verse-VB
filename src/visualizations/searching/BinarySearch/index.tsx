@@ -39,7 +39,10 @@ export default function BinarySearchVisualization() {
           <input
             type="number"
             value={target}
-            onChange={(e) => setTarget(Number(e.target.value))}
+            onChange={(e) => {
+              const v = e.target.valueAsNumber;
+              if (!Number.isNaN(v)) setTarget(v);
+            }}
             className="w-16 bg-background border border-border rounded px-2 py-1 text-sm font-mono text-foreground"
           />
         </div>

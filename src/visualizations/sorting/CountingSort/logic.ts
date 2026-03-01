@@ -5,6 +5,9 @@ export function generateCountingSortSteps(input: number[]): VisualizationStep[] 
   const n = arr.length;
   const steps: VisualizationStep[] = [];
   let stepId = 0;
+
+  if (n === 0) return steps;
+
   const max = Math.max(...arr);
 
   steps.push({

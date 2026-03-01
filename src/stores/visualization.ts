@@ -13,7 +13,7 @@ export type VisualizationAction =
   | { type: "STEP_BACK" }
   | { type: "RESET" }
   | { type: "SET_SPEED"; speed: number }
-  | { type: "SET_STEP"; index: number }
+  | { type: "SET_STEP"; index: number; maxIndex?: number }
   | { type: "TICK"; maxIndex: number };
 
 export const initialVisualizationState: VisualizationState = {
@@ -46,8 +46,12 @@ export function visualizationReducer(
       return { ...initialVisualizationState, speed: state.speed };
     case "SET_SPEED":
       return { ...state, speed: action.speed };
-    case "SET_STEP":
-      return { ...state, currentStepIndex: action.index, isPlaying: false };
+    case "SET_STEP": {
+      const idx = Number.isFinite(action.index) ? action.index : 0;
+      const max = action.maxIndex != null ? action.maxIndex : Infinity;
+      const clamped = Math.max(0, Math.min(idx, max));
+      return { ...state, currentStepIndex: clamped, isPlaying: false };
+    }
     case "TICK":
       if (state.currentStepIndex >= action.maxIndex) {
         return { ...state, isPlaying: false };

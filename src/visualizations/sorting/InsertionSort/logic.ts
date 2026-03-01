@@ -6,6 +6,8 @@ export function generateInsertionSortSteps(input: number[]): VisualizationStep[]
   const steps: VisualizationStep[] = [];
   let stepId = 0;
 
+  if (n === 0) return steps;
+
   steps.push({
     id: stepId++,
     description: `Starting Insertion Sort with ${n} elements`,

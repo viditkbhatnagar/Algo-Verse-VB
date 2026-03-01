@@ -68,7 +68,18 @@ export type StepAction =
   | "update-weight"
   | "relax-edge"
   | "forward-pass"
-  | "backprop";
+  | "backprop"
+  | "rotate-left"
+  | "rotate-right"
+  | "hash"
+  | "fill-cell"
+  | "backtrack"
+  | "place"
+  | "unplace"
+  | "mark-mst"
+  | "union"
+  | "slide-window"
+  | "move-pointer";
 
 export type HighlightColor =
   | "active"
@@ -76,7 +87,11 @@ export type HighlightColor =
   | "swapping"
   | "completed"
   | "selected"
-  | "path";
+  | "path"
+  | "mst-edge"
+  | "relaxed"
+  | "backtracked"
+  | "window";
 
 export interface HighlightInfo {
   indices: number[];
@@ -140,4 +155,109 @@ export interface SearchStepData {
   eliminated: number[]; // indices that are grayed out
   found: boolean;
   checked: number[]; // indices already checked
+}
+
+// --- Phase 3 step data shapes ---
+
+export interface TreeNodeData {
+  id: string;
+  value: number | string;
+  children: string[];
+  parent: string | null;
+  highlight?: HighlightColor;
+  balanceFactor?: number;
+}
+
+export interface TreeEdgeData {
+  source: string;
+  target: string;
+  highlight?: HighlightColor;
+  label?: string;
+}
+
+export interface TreeStepData {
+  nodes: TreeNodeData[];
+  edges: TreeEdgeData[];
+  rootId: string | null;
+  currentNodeId: string | null;
+  operation: string;
+  auxiliaryArray?: number[];
+  auxiliaryHighlights?: HighlightInfo[];
+}
+
+export interface MatrixStepData {
+  matrix: (number | string | null)[][];
+  cellHighlights: Record<string, HighlightColor>;
+  rowHeaders?: string[];
+  colHeaders?: string[];
+  arrows?: { from: [number, number]; to: [number, number]; label?: string }[];
+  currentCell?: [number, number];
+  optimalPath?: [number, number][];
+}
+
+export interface LinkedListNodeData {
+  id: string;
+  value: number | string;
+  next: string | null;
+  prev?: string | null;
+  highlight?: HighlightColor;
+}
+
+export interface LinkedListStepData {
+  nodes: LinkedListNodeData[];
+  headId: string | null;
+  tailId: string | null;
+  currentId: string | null;
+  pointers: Record<string, string>;
+}
+
+export interface HashTableBucket {
+  index: number;
+  items: { key: string; value: string; highlight?: HighlightColor }[];
+}
+
+export interface HashTableStepData {
+  buckets: HashTableBucket[];
+  probeSequence?: number[];
+  currentBucket?: number;
+  hashComputation?: string;
+  loadFactor?: number;
+}
+
+export interface WeightedEdge extends GraphEdge {
+  weight: number;
+  highlight?: HighlightColor;
+  inMST?: boolean;
+  directed?: boolean;
+}
+
+export interface WeightedGraphStepData {
+  nodes: GraphNode[];
+  edges: WeightedEdge[];
+  nodeStates: Record<string, "unvisited" | "visiting" | "visited" | "in-queue">;
+  currentNode: string | null;
+  distances: Record<string, number>;
+  predecessors: Record<string, string | null>;
+  visitOrder: string[];
+  mstEdges?: { source: string; target: string }[];
+  totalWeight?: number;
+  priorityQueue?: { node: string; priority: number }[];
+}
+
+export interface BacktrackingStepData {
+  grid: (number | string | null)[][];
+  cellHighlights: Record<string, HighlightColor>;
+  placementHistory: { row: number; col: number; value: number | string }[];
+  currentCell?: [number, number];
+  isBacktracking: boolean;
+  solutionFound?: boolean;
+}
+
+export interface ArrayWithPointersStepData {
+  array: (number | string)[];
+  pointers: Record<string, number>;
+  windowRange?: [number, number];
+  highlights: HighlightInfo[];
+  result?: (number | string)[];
+  currentValue?: number | string;
 }

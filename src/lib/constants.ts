@@ -6,6 +6,10 @@ export const VIZ_COLORS = {
   swapping: "#ef4444",
   completed: "#22c55e",
   highlighted: "#22d3ee",
+  mstEdge: "#8b5cf6",
+  relaxed: "#06b6d4",
+  backtracked: "#f87171",
+  window: "#a78bfa",
 } as const;
 
 // Playback speeds

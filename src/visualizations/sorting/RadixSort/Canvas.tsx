@@ -12,6 +12,10 @@ const COLOR_MAP: Record<HighlightColor | "default", string> = {
   completed: VIZ_COLORS.completed,
   selected: VIZ_COLORS.highlighted,
   path: "#a78bfa",
+  "mst-edge": VIZ_COLORS.mstEdge,
+  relaxed: VIZ_COLORS.relaxed,
+  backtracked: VIZ_COLORS.backtracked,
+  window: VIZ_COLORS.window,
 };
 
 interface RadixSortCanvasProps {
